@@ -12,7 +12,7 @@ import javax.management.MBeanServer;
  * with Hudson and create/find the MBeanServer.
  *
  * @author Renaud Bruyeron
- * @version $Id: PluginImpl.java 1407 2006-12-21 08:54:09Z bruyeron $
+ * @version $Id: PluginImpl.java 1671 2007-01-07 05:57:43Z kohsuke $
  * @plugin
  */
 public class PluginImpl extends Plugin {
@@ -22,7 +22,7 @@ public class PluginImpl extends Plugin {
 	public void start() throws Exception {
 		MBeanServer server = ManagementFactory.getPlatformMBeanServer();
 		jjl = new JmxJobListener(server);
-		Hudson.getInstance().addListener(jjl);
+		Hudson.getInstance().getJobListeners().add(jjl);
     }
 
 	/**
@@ -30,7 +30,7 @@ public class PluginImpl extends Plugin {
 	 */
 	@Override
 	public void stop() throws Exception {
-		Hudson.getInstance().removeListener(jjl);
+		Hudson.getInstance().getJobListeners().remove(jjl);
 		jjl.unregister();
 		jjl = null;
 	}
