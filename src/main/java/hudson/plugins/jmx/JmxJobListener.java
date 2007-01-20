@@ -30,7 +30,7 @@ import javax.management.ReflectionException;
 
 /**
  * @author bruyeron
- * @version $Id: JmxJobListener.java 1407 2006-12-21 08:54:09Z bruyeron $
+ * @version $Id: JmxJobListener.java 1834 2007-01-20 07:10:24Z kohsuke $
  */
 public class JmxJobListener extends JobListener {
 	
@@ -89,14 +89,14 @@ public class JmxJobListener extends JobListener {
 	 */
 	@Override
 	public void onLoaded() {
-		List<Job> jobs = Hudson.getInstance().getJobs();
+		List<Job> jobs = Hudson.getInstance().getAllItems(Job.class);
 		for(Job j : jobs){
 			onCreated(j);
 		}
 	}
 	
 	public void unregister(){
-		List<Job> jobs = Hudson.getInstance().getJobs();
+		List<Job> jobs = Hudson.getInstance().getAllItems(Job.class);
 		for(Job j : jobs){
 			onDeleted(j);
 		}
@@ -112,7 +112,7 @@ public class JmxJobListener extends JobListener {
         private MBeanInfo dMBeanInfo = null;
         
 		/**
-		 * @param wrapper
+		 * @param job
 		 */
 		private JobMBean(Job job) {
 			super();
