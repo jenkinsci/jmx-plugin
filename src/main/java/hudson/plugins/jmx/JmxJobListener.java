@@ -30,14 +30,15 @@ import javax.management.ReflectionException;
 
 /**
  * @author bruyeron
- * @version $Id: JmxJobListener.java 1834 2007-01-20 07:10:24Z kohsuke $
+ * @version $Id: JmxJobListener.java 2085 2007-02-07 02:45:25Z kohsuke $
  */
 public class JmxJobListener extends JobListener {
 	
 	public final static String JMX_NAME_PREFIX = "hudson:type=Job,name=";
 	protected MBeanServer server;
+    private boolean loaded;
 
-	/**
+    /**
 	 * @param server
 	 */
 	public JmxJobListener(MBeanServer server) {
@@ -93,10 +94,13 @@ public class JmxJobListener extends JobListener {
 		for(Job j : jobs){
 			onCreated(j);
 		}
-	}
+        loaded = true;
+    }
 	
 	public void unregister(){
-		List<Job> jobs = Hudson.getInstance().getAllItems(Job.class);
+        if(!loaded)
+            return; // early termination
+        List<Job> jobs = Hudson.getInstance().getAllItems(Job.class);
 		for(Job j : jobs){
 			onDeleted(j);
 		}
