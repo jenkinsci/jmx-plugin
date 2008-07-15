@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * with Hudson and create/find the MBeanServer.
  *
  * @author Renaud Bruyeron
- * @version $Id: PluginImpl.java 3850 2007-07-27 01:00:58Z kohsuke $
+ * @version $Id: PluginImpl.java 10807 2008-07-14 18:56:05Z btosabre $
  * @plugin
  */
 public class PluginImpl extends Plugin {

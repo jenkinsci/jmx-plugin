@@ -30,7 +30,7 @@ import javax.management.ReflectionException;
 
 /**
  * @author bruyeron
- * @version $Id: JmxJobListener.java 2085 2007-02-07 02:45:25Z kohsuke $
+ * @version $Id: JmxJobListener.java 10807 2008-07-14 18:56:05Z btosabre $
  */
 public class JmxJobListener extends JobListener {
 	
